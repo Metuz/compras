@@ -1,0 +1,51 @@
+<h1><%= @proyecto.nombre %></h1>
+
+<ul>
+    <% @proyecto.solicituds.each do |solicitud| %>
+        <li>
+            <a data-toggle="collapse" href="#<%= solicitud.id %>collapse" aria-expanded="false" aria-controls="<%= solicitud.id %>collapse">
+                <%= solicitud.pin %>
+            </a>
+            <div class="collapse" id="<%= solicitud.id %>collapse">
+                <div class="well">
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Unidades</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Precio Unitario</th>
+                                <th>Total</th>
+                                <th>Uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% solicitud.productos.each do |producto| %>
+                                <tr>
+                                    <td><%= producto.cantidad %></td>
+                                    <td><%= producto.unidad %></td>
+                                    <td><%= producto.nombre %></td>
+                                    <td><%= producto.descripcion %></td>
+                                    <td>$<%= producto.precio %></td>
+                                    <td>$<%= producto.total %></td>
+                                    <td><%= producto.uso %></td>
+                                </tr>
+                            <% end %>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Precio Total</th>
+                                <th><%= solicitud.precio_total %></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </li>
+    <%end %>
+</ul>
+
+<%= link_to 'Regresar', proyectos_path %>

@@ -1,0 +1,54 @@
+<h1>Proyectos</h1>
+<table id = "usuarios">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Clave</th>
+            <th>Status</th>
+            <th>Requisiciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @proyectos.each do |proyecto| %>
+            <tr>
+                <td><%= proyecto.nombre %></td>
+                <td><%= proyecto.pin %></td>
+                <td><a href = "#" data-toggle="modal" data-target="#<%= proyecto.id %>form"><%= proyecto.estatus %></a></td>
+                <td><%= link_to proyecto.solicituds.count, proyecto_path(proyecto) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% @proyectos.each do |proyecto| %>
+    <div class="modal fade" id="<%= proyecto.id %>form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><%= proyecto.nombre %></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <%= form_for(proyecto) do |f| %>
+                            <div class = "form-group">
+                                <%= f.label :nombre, "Nombre" %>
+                                <%= f.text_field :nombre,  class: 'form-control' %>
+                            </div>
+                            <div class = "form-group">
+                                <%= f.label :pin, "PIN" %>
+                                <%= f.email_field :pin,  class: 'form-control' %>
+                            </div>
+                            <div class = "form-group">
+                                <%= f.label :status, "Status" %>
+                                <%= f.check_box :status %>
+                            </div>
+                            <%= f.submit "Actualizar", class: "btn btn-success" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+<br>
+
+<%= link_to 'Agregar Proyecto', new_proyecto_path %>

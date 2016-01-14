@@ -1,0 +1,25 @@
+<h1>Compras</h1>
+<table  id = "usuarios">
+    <thead>
+        <tr>
+            <th>Clave</th>
+            <th>Empleado</th>
+            <th>Proyecto</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Productos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @compras.each do |compra| %>
+            <tr>
+                <td><%=  link_to compra.pin, compra_path(compra) %></td>
+                <td><%= compra.empleado.nombre %></td>
+                <td><%= compra.proyecto.nombre %></td>
+                <td><%= compra.total %></td>
+                <td><%= compra.estatus %></td>
+                <td><%= compra.productos.count %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

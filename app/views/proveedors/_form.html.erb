@@ -1,0 +1,52 @@
+<% if @proveedor.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h2>
+        <ul>
+            <% @proveedor.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<%= form_for(@proveedor) do |f| %>
+    <div class = "row">
+        <div class = "col-md-3">
+            <div class = "form-group">
+                <%= f.text_field :empresa, :placeholder => "Empresa", :class => "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-3">
+            <div class = "form-group">
+                 <%= f.text_field :nombre, :placeholder => "Nombre", :class => "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-3">
+            <div class = "form-group">
+                <%= f.text_field :direccion, :placeholder => "Dirección", :class => "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-3">
+            <div class = "form-group">
+                 <%= f.text_field :cp, :placeholder => "C.P.", :class => "form-control" %>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-md-4">
+            <div class = "form-group">
+                <%= f.text_field :telefono, :placeholder => "Telefono", :class => "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <div class = "form-group">
+                <%= f.text_field :rfc, :placeholder => "R.F.C.", :class => "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <div class = "form-group">
+                <%= f.text_field :contacto, :placeholder => "Contacto", :class => "form-control" %>
+            </div>
+        </div>
+    </div>
+    <%= f.submit "Crear", :class => "btn btn-success" %>
+<% end %>

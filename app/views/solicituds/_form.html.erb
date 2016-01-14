@@ -1,0 +1,63 @@
+<% if @solicitud.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@solicitud.errors.count, "error") %> se encontraron los siguientes errores:</h2>
+        <ul>
+            <% @solicitud.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<%= form_for(@solicitud) do |f| %>
+    <div class = "row">
+        <div class = "col-md-4">
+            <div class = "form-group">
+                <%= text_field_tag :search, params[:search], placeholder: "Correo", class: "form-control" %>
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <div class = "form-group">
+                <%= f.label :proyecto_id, "Proyecto" %>
+                <%= collection_select(:solicitud, :proyecto_id, Proyecto.all, :id, :nombre, :class => "form-control") %>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <%= f.fields_for :productos do |producto| %>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :cantidad, placeholder: "Cantidad", class: "form-control" %>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :unidad, placeholder: "Unidad", class: "form-control" %>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :nombre, placeholder: "Nombre", class: "form-control" %>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :descripcion, placeholder: "Descripción", class: "form-control" %>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :precio, placeholder: "Precio", class: "form-control" %>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class = "form-group">
+                    <%= producto.text_field :uso, placeholder: "Uso", class: "form-control" %>
+                </div>
+            </div>
+        <% end %>
+        <%= link_to_add_association "Agrega Producto", f, :productos, :class => "btn btn-danger" %>
+    </div>
+    </br>
+    <%= f.submit "Crear", class: "btn btn-success" %>
+<% end %>
+

@@ -1,0 +1,52 @@
+<h1>Empleados</h1>
+<table id = "usuarios">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @empleados.each do |empleado| %>
+            <tr>
+                <td><%= empleado.nombre %></td>
+                <td><%= empleado.email %></td>
+                <td><a href = "#" data-toggle="modal" data-target="#<%= empleado.id %>form"><%= empleado.estatus %></a></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% @empleados.each do |empleado| %>
+    <div class="modal fade" id="<%= empleado.id %>form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><%= empleado.nombre %></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <%= form_for(empleado) do |f| %>
+                            <div class = "form-group">
+                                <%= f.label :nombre, "Nombre" %>
+                                <%= f.text_field :nombre,  class: 'form-control' %>
+                            </div>
+                            <div class = "form-group">
+                                <%= f.label :email, "Correo" %>
+                                <%= f.email_field :email,  class: 'form-control' %>
+                            </div>
+                            <div class = "form-group">
+                                <%= f.label :status, "Status" %>
+                                <%= f.check_box :status %>
+                            </div>
+                            <%= f.submit "Actualizar", class: "btn btn-success" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+<br>
+
+<%= link_to 'Agregar Empleado', new_empleado_path %>

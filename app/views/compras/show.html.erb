@@ -1,0 +1,47 @@
+<h1><%= @compra.pin %></h1>
+<h4>Solicitud generada por <%= @compra.empleado.nombre %></h4>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Cantidad</th>
+            <th>Unidades</th>
+            <th>Concepto</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @compra.productos.each do |producto| %>
+            <tr>
+                <td><%= producto.cantidad_compra %></td>
+                <td><%= producto.unidad_compra %></td>
+                <td><%= producto.descripcion_compra %></td>
+                <td>$<%= producto.precio_compra %></td>
+                <td>$<%= producto.total_compra %></td>
+            </tr>
+        <% end %>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>SubTotal</th>
+            <th>$<%= @compra.productos.sum(:total_compra) %></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>IVA</th>
+            <th>$<%= @compra.iva %></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Precio Total</th>
+            <th>$<%= @compra.total %></th>
+        </tr>
+    </tbody>
+</table>
+<%= link_to 'Editar', edit_compra_path(@compra) %> |
+<%= link_to 'Regresar', compras_path %><% if @compra.aprobar %> | <%= link_to 'Imprimir', compra_path(@compra, format: 'pdf') %><% end %>

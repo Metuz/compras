@@ -1,0 +1,29 @@
+<h1>Usuarios</h1>
+<div role="tabpanel">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#tables" aria-controls="tables" role="tab" data-toggle="tab">Tablas</a></li>
+        <li role="presentation"><a href="#form" aria-controls="form" role="tab" data-toggle="tab">Crear</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tables">
+            <table id = "usuarios">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @usuarios.each do |usuario| %>
+                        <tr>
+                            <td><%= link_to usuario.nombre, edit_usuario_path(usuario) %></td>
+                            <td><%= usuario.email %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="form"><%= render 'form' %></div>
+    </div>
+</div>
+<br>

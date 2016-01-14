@@ -1,0 +1,9 @@
+<div id = "login">
+    <%= form_for(:session, url: login_path) do |f| %>
+        <span class = "glyphicon glyphicon-user"></span>
+        <%= f.email_field :email, placeholder: "Correo" %>
+        <span class = "glyphicon glyphicon-lock"></span>
+        <%= f.password_field :password, placeholder: "Contraseña" %>
+        <%= f.submit "Iniciar Sesion" %>
+    <% end %>
+</div>

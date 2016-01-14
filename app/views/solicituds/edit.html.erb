@@ -1,0 +1,69 @@
+<h1>Requisicion</h1>
+<h3>Genero <%= @solicitud.empleado.nombre %> para el proeycto <%= @solicitud.proyecto.nombre %></h3>
+<% if @solicitud.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@solicitud.errors.count, "error") %> se encontraron los siguientes errores:</h2>
+        <ul>
+            <% @solicitud.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<h4>Productos</h4>
+<%= form_for(@solicitud) do |f| %>
+    <div class = "row">
+        <div class = "col-md-10">
+            <table class = "table">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Unidades</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Precio Unitario</th>
+                        <th>Total</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @solicitud.productos.each do |producto| %>
+                    <tr>
+                        <td><%= producto.cantidad %></td>
+                        <td><%= producto.unidad %></td>
+                        <td><%= producto.nombre %></td>
+                        <td><%= producto.descripcion %></td>
+                        <td>$<%= producto.precio %></td>
+                        <td>$<%= producto.precio * producto.cantidad %></td>
+                        <td><%= producto.uso %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+        <div class = "col-md-1">
+            <table class = "table">
+                <thead>
+                    <tr>
+                        <th>Aprobar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%= f.fields_for :productos do |producto| %>
+                    <tr>
+                        <td><%= producto.check_box :aprobar %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class = "form-group">
+        <%= f.label :aprobar, "Aprobar Requisición" %>
+        <%= f.check_box :aprobar %>
+    </div>
+    <%= f.submit "Actualizar", :class => "btn btn-success" %>
+<% end %>
+
+<br>
+<%= link_to 'Regresar', solicituds_path %>

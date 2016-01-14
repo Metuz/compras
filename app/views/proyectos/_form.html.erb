@@ -1,0 +1,21 @@
+<% if @proyecto.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@proyecto.errors.count, "error") %> se encontraron los siguientes errores:</h2>
+        <ul>
+            <% @proyecto.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<%= form_for(@proyecto) do |f| %>
+    <div class="form-group">
+        <%= f.label :nombre, 'Nombre' %>
+        <%= f.text_field :nombre, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :pin %><br>
+        <%= f.text_field :pin, class: "form-control" %>
+    </div>
+    <%= f.submit "Crear", class: "btn btn-success" %>
+<% end %>

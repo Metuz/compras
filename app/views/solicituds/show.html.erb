@@ -1,0 +1,39 @@
+<h1><%= @solicitud.pin %></h1>
+<h4>Solicitud generada por <%= @solicitud.empleado.nombre %></h4>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>Cantidad</th>
+            <th>Unidades</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+            <th>Uso</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @solicitud.productos.each do |producto| %>
+            <tr>
+                <td><%= producto.cantidad %></td>
+                <td><%= producto.unidad %></td>
+                <td><%= producto.nombre %></td>
+                <td><%= producto.descripcion %></td>
+                <td>$<%= producto.precio %></td>
+                <td>$<%= producto.precio * producto.cantidad %></td>
+                <td><%= producto.uso %></td>
+            </tr>
+        <% end %>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Precio Total</th>
+            <th><%= @solicitud.precio_total %></th>
+        </tr>
+    </tbody>
+</table>
+<%= link_to 'Editar', edit_solicitud_path(@solicitud) %> |
+<%= link_to 'Regresar', solicituds_path %>
+                      

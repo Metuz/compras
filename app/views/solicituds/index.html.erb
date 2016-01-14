@@ -1,0 +1,25 @@
+<h1>Requisiciones</h1>
+<table id = "usuarios">
+    <thead>
+        <tr>
+            <th>Clave</th>
+            <th>Empleado</th>
+            <th>Proyecto</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @solicituds.each do |solicitud| %>
+            <tr>
+                <td><%= link_to solicitud.pin, solicitud_path(solicitud) %></td>
+                <td><%= solicitud.empleado.nombre %></td>
+                <td><%= solicitud.proyecto.nombre %></td>
+                <td><%= solicitud.precio_total %></td>
+                <td><%= solicitud.estatus %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<%= link_to 'Crear Requisición', new_solicitud_path %>

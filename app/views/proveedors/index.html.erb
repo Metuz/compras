@@ -1,0 +1,29 @@
+<h1>Proveedores</h1>
+<table id = "usuarios">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>CP</th>
+            <th>Telefono</th>
+            <th>RFC</th>
+            <th>Contacto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @proveedors.each do |proveedor| %>
+            <tr>
+                <td><%= proveedor.empresa %></td>   
+                <td><%= proveedor.nombre %></td>
+                <td><%= proveedor.direccion %></td>
+                <td><%= proveedor.cp %></td>
+                <td><%= proveedor.telefono %></td>
+                <td><%= proveedor.rfc %></td>
+                <td><%= proveedor.contacto %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+<%= link_to 'Agregar Proveedor', new_proveedor_path %>
